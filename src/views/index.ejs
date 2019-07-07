@@ -1,0 +1,66 @@
+<%include partials/_header%>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/add" method="POST">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="title" placeholder="Ingrese titulo">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="description" id="" cols="80" class="form-control" placeholder="Inserta descripcion"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary btn-block">Add</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Title</th>
+                            <th>descripcion</th>
+                            <th>Action</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        <%for(var i=0;i<tasks.length;i++) {%>
+                            <tr>
+                                <td>
+                                    <%= i+1%>
+                                </td>
+                                <th>
+                                    <%=tasks[i].title %>
+                                </th>
+                                <th>
+                                    <%=tasks[i].description%>
+                                </th>
+                                <td>
+                                    <%if (tasks[i].status==false){%>
+                                        <a href="/turn/<%=tasks[i]._id%>" class="btn btn-dark"> Done</a>
+                                        <%} else {%>
+                                            <a href="/turn/<%=tasks[i]._id%>" class="btn btn-success"> Done</a>
+                                            <%}%>
+                                                <a href="/delete/<%=tasks[i]._id%>" class="btn btn-danger"> Delete</a>
+                                                <a href="/edit/<%=tasks[i]._id%>" class="btn btn-info"> Edit</a>
+
+                                </td>
+
+                            </tr>
+
+                            <% } %>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <%include partials/_footer%>
